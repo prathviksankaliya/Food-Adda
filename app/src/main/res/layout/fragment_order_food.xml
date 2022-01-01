@@ -20,17 +20,18 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/igAddCartOrder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:src="@drawable/shopping"
+        android:src="@drawable/bag"
         android:contentDescription="@string/topline"
         app:layout_constraintBottom_toBottomOf="@+id/igBackDashboard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/igBackDashboard" />
 
     <TextView
+        android:id="@+id/txAddCartItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="1"
@@ -39,30 +40,32 @@
         android:textStyle="bold"
         android:visibility="gone"
         android:fontFamily="@font/open_sans_bold"
-        app:layout_constraintBottom_toTopOf="@+id/imageView2"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2" />
+        app:layout_constraintBottom_toTopOf="@+id/igAddCartOrder"
+        app:layout_constraintEnd_toEndOf="@+id/igAddCartOrder" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:layout_marginTop="16dp"
         app:cardCornerRadius="25dp"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
+        android:elevation="40dp"
+        app:layout_constraintEnd_toEndOf="@+id/igAddCartOrder"
         app:layout_constraintStart_toStartOf="@+id/igBackDashboard"
         app:layout_constraintTop_toBottomOf="@+id/igBackDashboard">
 
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="220dp"
+            android:id="@+id/igOrderFood"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:contentDescription="@string/topline"
-            android:scaleType="centerCrop"
-            android:src="@drawable/pizza" />
+            android:layout_gravity="center"
+            android:src="@drawable/pizzamenu" />
 
     </androidx.cardview.widget.CardView>
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/txOrderFoodName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -80,12 +83,12 @@
         android:layout_height="wrap_content"
         android:src="@drawable/star24"
         android:layout_marginEnd="6dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView7"
-        app:layout_constraintEnd_toStartOf="@+id/textView9"
-        app:layout_constraintTop_toTopOf="@+id/textView7" />
+        app:layout_constraintBottom_toBottomOf="@+id/txOrderFoodName"
+        app:layout_constraintEnd_toStartOf="@+id/txOrderFoodRating"
+        app:layout_constraintTop_toTopOf="@+id/txOrderFoodName" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/txOrderFoodRating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="4.5"
@@ -97,7 +100,7 @@
         app:layout_constraintTop_toTopOf="@+id/imageView3" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/txOrderFoodPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -105,8 +108,8 @@
         android:text="₹ 250"
         android:textColor="@color/orange"
         android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="@+id/textView7"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+        app:layout_constraintStart_toStartOf="@+id/txOrderFoodName"
+        app:layout_constraintTop_toBottomOf="@+id/txOrderFoodName" />
 
     <TextView
         android:id="@+id/textView11"
@@ -116,9 +119,9 @@
         android:fontFamily="@font/open_sans_semibold"
         android:text="@string/detailFood"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/textView9"
-        app:layout_constraintStart_toStartOf="@+id/textView10"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+        app:layout_constraintEnd_toEndOf="@+id/txOrderFoodRating"
+        app:layout_constraintStart_toStartOf="@+id/txOrderFoodPrice"
+        app:layout_constraintTop_toBottomOf="@+id/txOrderFoodPrice" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -131,7 +134,7 @@
 
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btnMinus"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:background="@drawable/search_bg"
@@ -140,7 +143,7 @@
             android:textSize="25sp" />
 
         <TextView
-            android:id="@+id/textView12"
+            android:id="@+id/txCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -151,7 +154,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/btnPlus"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:background="@drawable/search_bg"
@@ -171,6 +174,7 @@
         app:layout_constraintStart_toStartOf="@+id/textView11">
 
         <TextView
+            android:id="@+id/txTotalFoodPrice"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="₹ 250"
@@ -182,6 +186,7 @@
             />
 
         <Button
+            android:id="@+id/btnAddToCart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="15dp"
@@ -192,10 +197,3 @@
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-<!--mhveljebfjebfjbfe-->
-<!--ef.knejfe-->
-<!--e.mfn qej-->
-<!--kjhevfkhevf-->
-<!--jahfvakehvfkahe-->

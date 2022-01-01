@@ -3,17 +3,27 @@ package com.shadowtech.foodadda.Model;
 public class AllMenuItems {
 
    private int allitemimage;
-   private String allitemname , allitemspecial , allitemrating ,allitemprice;
+   private String allitemname , allitemspecial , allitemrating ,allitemprice , delivery;
 
-    public AllMenuItems(int allitemimage, String allitemname, String allitemspecial, String allitemrating, String allitemprice) {
+
+    public AllMenuItems(int allitemimage, String allitemname, String allitemspecial, String allitemrating, String allitemprice, String delivery) {
         this.allitemimage = allitemimage;
         this.allitemname = allitemname;
         this.allitemspecial = allitemspecial;
         this.allitemrating = allitemrating;
         this.allitemprice = allitemprice;
+        this.delivery = delivery;
     }
 
     public AllMenuItems() {
+    }
+
+    public String getDelivery() {
+        return delivery;
+    }
+
+    public void setDelivery(String delivery) {
+        this.delivery = delivery;
     }
 
     public int getAllitemimage() {

@@ -40,6 +40,7 @@ public class PopularItemsRecyclerAdapter extends RecyclerView.Adapter<PopularIte
     PopularItems model = popularItems.get(position);
     holder.sampleimg.setImageResource(model.getImage());
     holder.sampletext.setText(model.getName());
+
     }
 
     @Override

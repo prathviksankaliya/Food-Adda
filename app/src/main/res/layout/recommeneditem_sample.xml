@@ -40,7 +40,7 @@
                     android:layout_height="150dp"
                     android:contentDescription="@string/topline"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/pizza" />
+                    android:src="@drawable/pizzamenu" />
             </androidx.cardview.widget.CardView>
 
 
