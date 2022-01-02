@@ -12,7 +12,10 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.shadowtech.foodadda.R;
+import com.shadowtech.foodadda.databinding.FragmentBottomSheetAddCartBinding;
 import com.shadowtech.foodadda.databinding.FragmentOrderFoodBinding;
 
 
@@ -98,6 +101,13 @@ public class OrderFoodFragment extends Fragment {
             }
         });
 
+        binding.igAddCartOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BottomSheetAddCartFragment bottomSheetAddCartFragment = new BottomSheetAddCartFragment();
+                bottomSheetAddCartFragment.show(getParentFragmentManager() , bottomSheetAddCartFragment.getTag());
+            }
+        });
         binding.btnAddToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
