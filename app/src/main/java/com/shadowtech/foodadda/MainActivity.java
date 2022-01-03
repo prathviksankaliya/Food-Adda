@@ -16,13 +16,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.frMainContainer , new SplashFragment());
+        fragmentTransaction.replace(R.id.frMainContainer, new SplashFragment());
         fragmentTransaction.commit();
     }
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-
+        if (getSupportFragmentManager().getBackStackEntryCount() == 1) {
+            finishAffinity();
+        } else {
+            super.onBackPressed();
+        }
     }
 }

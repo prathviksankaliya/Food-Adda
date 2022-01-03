@@ -6,58 +6,59 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.DashboardFragment">
 
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:fontFamily="@font/open_sans_bold"
-                android:text="Food Adda"
-                android:textColor="@color/light_black"
-                android:textSize="24sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/open_sans_bold"
+        android:text="Food Adda"
+        android:textColor="@color/light_black"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/igCartHome"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:src="@drawable/bag"
-                app:layout_constraintBottom_toBottomOf="@+id/textView3"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView3" />
+    <ImageView
+        android:id="@+id/igCartHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/bag"
+        app:layout_constraintBottom_toBottomOf="@+id/textView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView3" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="1"
-                android:textSize="12sp"
-                android:visibility="gone"
-                android:textStyle="bold"
-                android:textColor="@color/orange"
-                android:fontFamily="@font/open_sans_bold"
-                app:layout_constraintBottom_toTopOf="@+id/igCartHome"
-                app:layout_constraintEnd_toEndOf="@+id/igCartHome" />
+    <TextView
+        android:id="@+id/txAddHomeCartItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/open_sans_bold"
+        android:text="1"
+        android:textColor="@color/orange"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/igCartHome"
+        app:layout_constraintEnd_toEndOf="@+id/igCartHome" />
 
 
-            <EditText
-                android:id="@+id/editText"
-                android:layout_width="0dp"
-                android:layout_height="52dp"
-                android:layout_marginTop="8dp"
-                android:autofillHints="true"
-                android:background="@drawable/search_bg"
-                android:drawableStart="@drawable/ic_baseline_search_24"
-                android:drawablePadding="16dp"
-                android:fontFamily="serif"
-                android:hint="Search Food"
-                android:inputType="text"
-                android:padding="16dp"
-                app:layout_constraintEnd_toEndOf="@+id/igCartHome"
-                app:layout_constraintStart_toStartOf="@+id/textView3"
-                app:layout_constraintTop_toBottomOf="@+id/textView3" />
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="8dp"
+        android:autofillHints="true"
+        android:background="@drawable/search_bg"
+        android:drawableStart="@drawable/ic_baseline_search_24"
+        android:drawablePadding="16dp"
+        android:fontFamily="serif"
+        android:hint="Search Food"
+        android:inputType="text"
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/igCartHome"
+        app:layout_constraintStart_toStartOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
 
     <TextView
@@ -65,23 +66,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/open_sans_bold"
         android:text="Popular This Week"
         android:textColor="@color/light_black"
         android:textSize="16sp"
-        android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvpopularItems"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView4" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvpopularItems"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
 
     <TextView
@@ -89,11 +90,11 @@
         android:id="@+id/textView6"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/open_sans_bold"
         android:text="All Menu Items"
         android:textColor="@color/light_black"
         android:textSize="16sp"
-        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/rvpopularItems" />
 
@@ -111,25 +112,25 @@
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!-- <TextView
-                android:id="@+id/textView5"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:fontFamily="@font/open_sans_bold"
-                android:text="Recommened for You"
-                android:textColor="@color/light_black"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="@+id/textView4"
-                app:layout_constraintTop_toBottomOf="@+id/rvpopularItems" />
+    <!-- <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:text="Recommened for You"
+                    android:textColor="@color/light_black"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="@+id/textView4"
+                    app:layout_constraintTop_toBottomOf="@+id/rvpopularItems" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvrecommenedItems"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView5" />
--->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvrecommenedItems"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView5" />
+    -->

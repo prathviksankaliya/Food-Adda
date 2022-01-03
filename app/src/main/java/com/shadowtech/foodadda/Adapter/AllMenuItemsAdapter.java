@@ -11,9 +11,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.shadowtech.foodadda.Fragments.OrderFoodFragment;
@@ -35,52 +32,54 @@ public class AllMenuItemsAdapter extends RecyclerView.Adapter<AllMenuItemsAdapte
     @NonNull
     @Override
     public viewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.allmenuitems_sample , parent , false);
+        View view = LayoutInflater.from(context).inflate(R.layout.allmenuitems_sample, parent, false);
         return new viewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
         AllMenuItems allMenuItems = Model.get(position);
-        String Price = "₹ "+allMenuItems.getAllitemprice();
-    holder.image.setImageResource(allMenuItems.getAllitemimage());
-    holder.name.setText(allMenuItems.getAllitemname());
-    holder.special.setText(allMenuItems.getAllitemspecial());
-    holder.rating.setText(allMenuItems.getAllitemrating());
-    holder.price.setText(Price);
-    holder.delivery.setText(allMenuItems.getDelivery());
-    holder.itemView.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            SharedPreferences spf = context.getSharedPreferences("AllMenuItemsDetail" , Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = spf.edit();
-            editor.putInt("Image" , allMenuItems.getAllitemimage());
-            editor.putString("Name" , allMenuItems.getAllitemname());
-            editor.putString("Special" , allMenuItems.getAllitemspecial());
-            editor.putString("Rating" , allMenuItems.getAllitemrating());
-            editor.putString("Price" , allMenuItems.getAllitemprice());
-            editor.putString("Delivery" , allMenuItems.getDelivery());
-            editor.apply();
-            AppCompatActivity activity =(AppCompatActivity) v.getContext();
-            activity.getSupportFragmentManager().beginTransaction().replace(R.id.frMainContainer , new OrderFoodFragment()).commit();
-        }
-    });
-    holder.price.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            SharedPreferences spf = context.getSharedPreferences("AllMenuItemsDetail" , Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = spf.edit();
-            editor.putInt("Image" , allMenuItems.getAllitemimage());
-            editor.putString("Name" , allMenuItems.getAllitemname());
-            editor.putString("Special" , allMenuItems.getAllitemspecial());
-            editor.putString("Rating" , allMenuItems.getAllitemrating());
-            editor.putString("Price" , allMenuItems.getAllitemprice());
-            editor.putString("Delivery" , allMenuItems.getDelivery());
-            editor.apply();
-            AppCompatActivity activity =(AppCompatActivity) v.getContext();
-            activity.getSupportFragmentManager().beginTransaction().replace(R.id.frMainContainer , new OrderFoodFragment()).commit();
-        }
-    });
+        String Price = "₹ " + allMenuItems.getAllitemprice();
+        holder.image.setImageResource(allMenuItems.getAllitemimage());
+        holder.name.setText(allMenuItems.getAllitemname());
+        holder.special.setText(allMenuItems.getAllitemspecial());
+        holder.rating.setText(allMenuItems.getAllitemrating());
+        holder.price.setText(Price);
+        holder.delivery.setText(allMenuItems.getDelivery());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences spf = context.getSharedPreferences("AllMenuItemsDetail", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = spf.edit();
+                editor.putInt("Image", allMenuItems.getAllitemimage());
+                editor.putString("Name", allMenuItems.getAllitemname());
+                editor.putString("Special", allMenuItems.getAllitemspecial());
+                editor.putString("Rating", allMenuItems.getAllitemrating());
+                editor.putString("Price", allMenuItems.getAllitemprice());
+                editor.putString("Delivery", allMenuItems.getDelivery());
+                editor.putInt("Insert", 1);
+                editor.apply();
+                AppCompatActivity activity = (AppCompatActivity) v.getContext();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.frMainContainer, new OrderFoodFragment()).commit();
+            }
+        });
+        holder.price.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences spf = context.getSharedPreferences("AllMenuItemsDetail", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = spf.edit();
+                editor.putInt("Image", allMenuItems.getAllitemimage());
+                editor.putString("Name", allMenuItems.getAllitemname());
+                editor.putString("Special", allMenuItems.getAllitemspecial());
+                editor.putString("Rating", allMenuItems.getAllitemrating());
+                editor.putString("Price", allMenuItems.getAllitemprice());
+                editor.putString("Delivery", allMenuItems.getDelivery());
+                editor.putInt("Insert", 1);
+                editor.apply();
+                AppCompatActivity activity = (AppCompatActivity) v.getContext();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.frMainContainer, new OrderFoodFragment()).commit();
+            }
+        });
 
     }
 
@@ -92,15 +91,16 @@ public class AllMenuItemsAdapter extends RecyclerView.Adapter<AllMenuItemsAdapte
     public static class viewHolder extends RecyclerView.ViewHolder {
 
         ImageView image;
-        TextView name , special , rating ,delivery;
+        TextView name, special, rating, delivery;
         Button price;
+
         public viewHolder(@NonNull View itemView) {
             super(itemView);
-            image= itemView.findViewById(R.id.igallitemsample);
-            name = itemView.findViewById(R.id.txallitemnamesample);
+            image = itemView.findViewById(R.id.igAddCartImage);
+            name = itemView.findViewById(R.id.txAddCartFoodName);
             special = itemView.findViewById(R.id.txallitemspecialsample);
             rating = itemView.findViewById(R.id.txallitemratingsample);
-            price = itemView.findViewById(R.id.btnallitemsample);
+            price = itemView.findViewById(R.id.btnCartPrice);
             delivery = itemView.findViewById(R.id.txDelivery);
         }
     }

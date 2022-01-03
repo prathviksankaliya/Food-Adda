@@ -1,7 +1,7 @@
 package com.shadowtech.foodadda.Model;
 
 public class PopularItems {
-    private String name ;
+    private String name;
     private int image;
 
     public PopularItems(String name, int image) {

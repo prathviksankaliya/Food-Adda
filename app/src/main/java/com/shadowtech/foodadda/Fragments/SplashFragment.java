@@ -17,10 +17,10 @@ import com.shadowtech.foodadda.databinding.FragmentSplashBinding;
 public class SplashFragment extends Fragment {
 
 
-
     public SplashFragment() {
         // Required empty public constructor
     }
+
     FragmentSplashBinding binding;
 
     @Override
@@ -33,7 +33,7 @@ public class SplashFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.frMainContainer , new DashboardFragment());
+                fragmentTransaction.replace(R.id.frMainContainer, new DashboardFragment());
                 fragmentTransaction.commit();
             }
         });

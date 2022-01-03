@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,9 +10,9 @@
         android:id="@+id/igBackDashboard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/topline"
-        android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/topline"
         android:padding="5dp"
         android:src="@drawable/ic_baseline_keyboard_backspace_24"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,8 +23,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:src="@drawable/bag"
         android:contentDescription="@string/topline"
+        android:src="@drawable/bag"
         app:layout_constraintBottom_toBottomOf="@+id/igBackDashboard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/igBackDashboard" />
@@ -34,12 +33,12 @@
         android:id="@+id/txAddCartItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/open_sans_bold"
         android:text="1"
         android:textColor="@color/orange"
         android:textSize="12sp"
         android:textStyle="bold"
         android:visibility="gone"
-        android:fontFamily="@font/open_sans_bold"
         app:layout_constraintBottom_toTopOf="@+id/igAddCartOrder"
         app:layout_constraintEnd_toEndOf="@+id/igAddCartOrder" />
 
@@ -48,8 +47,8 @@
         android:layout_width="0dp"
         android:layout_height="200dp"
         android:layout_marginTop="16dp"
-        app:cardCornerRadius="25dp"
         android:elevation="40dp"
+        app:cardCornerRadius="25dp"
         app:layout_constraintEnd_toEndOf="@+id/igAddCartOrder"
         app:layout_constraintStart_toStartOf="@+id/igBackDashboard"
         app:layout_constraintTop_toBottomOf="@+id/igBackDashboard">
@@ -58,8 +57,8 @@
             android:id="@+id/igOrderFood"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:contentDescription="@string/topline"
             android:layout_gravity="center"
+            android:contentDescription="@string/topline"
             android:src="@drawable/pizzamenu" />
 
     </androidx.cardview.widget.CardView>
@@ -81,8 +80,8 @@
         android:id="@+id/imageView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/star24"
         android:layout_marginEnd="6dp"
+        android:src="@drawable/star24"
         app:layout_constraintBottom_toBottomOf="@+id/txOrderFoodName"
         app:layout_constraintEnd_toStartOf="@+id/txOrderFoodRating"
         app:layout_constraintTop_toTopOf="@+id/txOrderFoodName" />
@@ -91,8 +90,8 @@
         android:id="@+id/txOrderFoodRating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="4.5"
         android:fontFamily="@font/open_sans_bold"
+        android:text="4.5"
         android:textColor="@color/light_black"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView3"
@@ -124,10 +123,11 @@
         app:layout_constraintTop_toBottomOf="@+id/txOrderFoodPrice" />
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginTop="16dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="@+id/textView11"
         app:layout_constraintStart_toStartOf="@+id/textView11"
         app:layout_constraintTop_toBottomOf="@+id/textView11">
@@ -164,11 +164,42 @@
             android:textStyle="bold" />
     </LinearLayout>
 
+    <EditText
+        android:id="@+id/edOrderFullName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="10dp"
+        android:autofillHints="true"
+        android:background="@drawable/search_bg"
+        android:fontFamily="serif"
+        android:hint="Full Name"
+        android:inputType="text"
+        android:padding="15dp"
+        app:layout_constraintEnd_toEndOf="@+id/textView11"
+        app:layout_constraintStart_toStartOf="@+id/textView11"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+    <EditText
+        android:id="@+id/edOrderPhone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:autofillHints="true"
+        android:background="@drawable/search_bg"
+        android:fontFamily="serif"
+        android:hint="Phone"
+        android:inputType="phone"
+        android:padding="15dp"
+        app:layout_constraintEnd_toEndOf="@+id/edOrderFullName"
+        app:layout_constraintStart_toStartOf="@+id/edOrderFullName"
+        app:layout_constraintTop_toBottomOf="@+id/edOrderFullName" />
+
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginBottom="16dp"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/textView11"
         app:layout_constraintStart_toStartOf="@+id/textView11">
@@ -177,23 +208,21 @@
             android:id="@+id/txTotalFoodPrice"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="₹ 250"
-            android:textSize="26sp"
-            android:gravity="center"
             android:fontFamily="@font/open_sans_bold"
-            android:textStyle="bold"
+            android:gravity="center"
+            android:text="₹ 250"
             android:textColor="@color/orange"
-            />
+            android:textSize="26sp"
+            android:textStyle="bold" />
 
         <Button
-            android:id="@+id/btnAddToCart"
+            android:id="@+id/btnOrderAddToCart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="15dp"
-            android:text="Add To Cart"
-            android:background="@drawable/itemimage_bg"
             android:layout_marginStart="20dp"
-            />
+            android:background="@drawable/itemimage_bg"
+            android:padding="15dp"
+            android:text="Add To Cart" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

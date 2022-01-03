@@ -30,16 +30,16 @@ public class PopularItemsRecyclerAdapter extends RecyclerView.Adapter<PopularIte
     @NonNull
     @Override
     public viewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.popularitems_sample , parent , false);
+        View view = LayoutInflater.from(context).inflate(R.layout.popularitems_sample, parent, false);
 
         return new viewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
-    PopularItems model = popularItems.get(position);
-    holder.sampleimg.setImageResource(model.getImage());
-    holder.sampletext.setText(model.getName());
+        PopularItems model = popularItems.get(position);
+        holder.sampleimg.setImageResource(model.getImage());
+        holder.sampletext.setText(model.getName());
 
     }
 
@@ -51,6 +51,7 @@ public class PopularItemsRecyclerAdapter extends RecyclerView.Adapter<PopularIte
     public static class viewHolder extends RecyclerView.ViewHolder {
         ImageView sampleimg;
         TextView sampletext;
+
         public viewHolder(@NonNull View itemView) {
             super(itemView);
             sampleimg = itemView.findViewById(R.id.igsampleimage);

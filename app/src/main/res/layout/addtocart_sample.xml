@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-
-    >
+    android:elevation="40dp">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="7dp"
@@ -19,14 +20,15 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#17FF9800">
 
             <ImageView
                 android:id="@+id/igAddCartImage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
                 android:layout_margin="6dp"
                 android:src="@drawable/pasta64"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -40,69 +42,75 @@
                 android:layout_marginStart="8dp"
                 android:fontFamily="@font/open_sans_bold"
                 android:text="American Pasta"
+                android:textSize="18sp"
                 app:layout_constraintStart_toEndOf="@+id/igAddCartImage"
-                app:layout_constraintTop_toTopOf="@+id/igAddCartImage" />
+                app:layout_constraintTop_toTopOf="@+id/igAddCartImage"
+
+                />
 
             <TextView
-                android:id="@+id/txallitemspecialsample"
+                android:id="@+id/textView8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="6dp"
                 android:fontFamily="@font/open_sans_semibold"
-                android:text="Special"
+                android:text="Quantity :"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textView9"
+                app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+            <TextView
+                android:id="@+id/txShowQuantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/open_sans_bold"
+                android:text="1"
+                android:textColor="@color/orange"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/textView8"
+                app:layout_constraintStart_toEndOf="@+id/textView8"
+                app:layout_constraintTop_toTopOf="@+id/textView8" />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/open_sans_semibold"
+                android:text="Order Id :"
+                android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="@+id/txAddCartFoodName"
                 app:layout_constraintTop_toBottomOf="@+id/txAddCartFoodName" />
 
-            <ImageView
-                android:id="@+id/imageView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/star"
-                app:layout_constraintStart_toStartOf="@+id/txallitemspecialsample"
-                app:layout_constraintTop_toBottomOf="@+id/txallitemspecialsample" />
-
             <TextView
-
-                android:id="@+id/txallitemratingsample"
+                android:id="@+id/txOrderId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-                android:layout_marginBottom="6dp"
-                android:fontFamily="@font/open_sans_bold"
-                android:text="4.3"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageView5"
-                app:layout_constraintTop_toTopOf="@+id/imageView5" />
-
-            <TextView
-                android:id="@+id/txDelivery"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:fontFamily="@font/open_sans_semibold"
-                android:text="Paid Delivery"
-                android:textColor="@color/orange"
-                app:layout_constraintBottom_toBottomOf="@+id/txallitemratingsample"
-                app:layout_constraintEnd_toStartOf="@+id/btnCartPrice"
-                app:layout_constraintStart_toEndOf="@+id/txallitemratingsample"
-                app:layout_constraintTop_toBottomOf="@+id/txallitemspecialsample" />
+                android:text="1"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView9"
+                app:layout_constraintStart_toEndOf="@+id/textView9"
+                app:layout_constraintTop_toTopOf="@+id/textView9" />
 
             <Button
-                android:id="@+id/btnCartPrice"
+                android:id="@+id/btnShowCartPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="6dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
                 android:text="₹ 250"
-                app:layout_constraintBottom_toBottomOf="@+id/txallitemratingsample"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/txAddCartFoodName" />
-
+                app:layout_constraintTop_toTopOf="@+id/igAddCartImage" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
