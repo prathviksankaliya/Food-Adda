@@ -30,10 +30,9 @@ public class OrderFoodFragment extends Fragment {
         // Required empty public constructor
     }
 
-    FragmentOrderFoodBinding binding;
-    int Count = 1;
-    int TotlePrice, FoodPrice, Quantity, UpdateTotalPrice, UserID;
-
+    private FragmentOrderFoodBinding binding;
+    private int Count = 1;
+    private int TotlePrice, FoodPrice, Quantity, UpdateTotalPrice, UserID;
     private String UserEmail, UserPhone;
     private SpfUserData spf;
     private SharedPreferences sharedPreferences;
@@ -60,12 +59,13 @@ public class OrderFoodFragment extends Fragment {
         String Special = spf.getSpfData().getString("Special", null);
         String Rating = spf.getSpfData().getString("Rating", null);
         String Price = spf.getSpfData().getString("Price", null);
-         Quantity = spf.getSpfData().getInt("Quntity", 0);
-
+        Quantity = spf.getSpfData().getInt("Quntity", 0);
         String Delivery = spf.getSpfData().getString("Delivery", null);
         int InsertType = spf.getSpfData().getInt("Insert", 0);
         int UpdateType = spf.getSpfData().getInt("Update", 0);
 
+        // Insert or Update Order Maintain To one Screen
+        // Insert = 1 to Insert The Data
         if (InsertType == 1) {
             Glide.with(requireContext()).load(ApiUtilities.MenuItemImageUrl + Image).into(binding.igOrderFood);
             binding.txOrderFoodName.setText(Name);
@@ -75,6 +75,7 @@ public class OrderFoodFragment extends Fragment {
 
             FoodPrice = Integer.parseInt(Price);
 
+            // Quantity Plus
             binding.btnPlus.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -92,6 +93,8 @@ public class OrderFoodFragment extends Fragment {
                     binding.txTotalFoodPrice.setText("₹ " + TotlePrice);
                 }
             });
+
+            // Quantity Minus
             binding.btnMinus.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -123,6 +126,7 @@ public class OrderFoodFragment extends Fragment {
                         fragmentTransaction.replace(R.id.frMainContainer, new UserDetailsFragment());
                         fragmentTransaction.commit();
                     } else {
+                        // Read User By Email , Phone
                         ApiUtilities.apiInterface().ReadUser(UserEmail, UserPhone).enqueue(new Callback<UserDetails>() {
                             @Override
                             public void onResponse(Call<UserDetails> call, Response<UserDetails> response) {
@@ -134,6 +138,7 @@ public class OrderFoodFragment extends Fragment {
                                         SharedPreferences.Editor editor = sharedPreferences.edit();
                                         editor.putInt("UserId", UserID);
                                         editor.apply();
+                                        // Confirm Order With Data
                                         ApiUtilities.apiInterface().ConfirmOrder(UserID, Count, String.valueOf(TotlePrice), Name, Image).enqueue(new Callback<Responce>() {
                                             @Override
                                             public void onResponse(Call<Responce> call, Response<Responce> response) {
@@ -143,7 +148,7 @@ public class OrderFoodFragment extends Fragment {
                                                         Toast.makeText(getContext(), "Something Went Wrong!!", Toast.LENGTH_SHORT).show();
                                                     } else {
                                                         Toast.makeText(getContext(), "" + model.getMessage(), Toast.LENGTH_SHORT).show();
-                                                        spf.setSpfData(Image, Name, Special, Rating, String.valueOf(TotlePrice), Delivery, 0,Count,0,0);
+                                                        spf.setSpfData(Image, Name, Special, Rating, String.valueOf(TotlePrice), Delivery, 0, Count, 0, 0);
                                                         FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
                                                         fragmentTransaction.replace(R.id.frMainContainer, new DashboardFragment());
                                                         fragmentTransaction.commit();
@@ -153,7 +158,7 @@ public class OrderFoodFragment extends Fragment {
 
                                             @Override
                                             public void onFailure(Call<Responce> call, Throwable t) {
-                                                Toast.makeText(getContext(), "Something Went Wrong order"+t.getMessage(), Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(getContext(), "Something Went Wrong order" + t.getMessage(), Toast.LENGTH_SHORT).show();
                                             }
                                         });
 
@@ -165,13 +170,15 @@ public class OrderFoodFragment extends Fragment {
 
                             @Override
                             public void onFailure(Call<UserDetails> call, Throwable t) {
-                                Toast.makeText(getContext(), "Something Went Wrong"+t.getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "Something Went Wrong" + t.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
                 }
 
             });
+
+            // Update = 2 to Update The Data
         } else if (UpdateType == 2) {
             SharedPreferences pref = requireContext().getSharedPreferences("AllMenuItemsDetail", Context.MODE_PRIVATE);
             int id = pref.getInt("id", 0);
@@ -180,7 +187,7 @@ public class OrderFoodFragment extends Fragment {
             editor.remove("Update");
             editor.apply();
 
-
+            // Load Online Image In app
             Glide.with(requireContext()).load(ApiUtilities.MenuItemImageUrl + Image).into(binding.igOrderFood);
             binding.txOrderFoodName.setText(Name);
             binding.txOrderFoodRating.setText(Rating);
@@ -192,7 +199,7 @@ public class OrderFoodFragment extends Fragment {
             binding.txOrderFoodPrice.setText("₹ " + SingleFoodPrice);
             binding.txTotalFoodPrice.setText("₹ " + TotalPrice);
             binding.btnOrderAddToCart.setText("Update Order");
-
+            // Quantity Plus
             binding.btnPlus.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -210,6 +217,8 @@ public class OrderFoodFragment extends Fragment {
                     binding.txTotalFoodPrice.setText("₹ " + UpdateTotalPrice);
                 }
             });
+
+            // Quantity Minus
             binding.btnMinus.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -232,7 +241,9 @@ public class OrderFoodFragment extends Fragment {
                     if (UpdateTotalPrice == 0) {
                         UpdateTotalPrice = SingleFoodPrice;
                     }
-                    ApiUtilities.apiInterface().UpdateOrder(id,Quantity,String.valueOf(UpdateTotalPrice),Name,Image).enqueue(new Callback<Responce>() {
+
+                    // Update The Record
+                    ApiUtilities.apiInterface().UpdateOrder(id, Quantity, String.valueOf(UpdateTotalPrice), Name, Image).enqueue(new Callback<Responce>() {
                         @Override
                         public void onResponse(Call<Responce> call, Response<Responce> response) {
                             Responce model = response.body();
@@ -254,12 +265,12 @@ public class OrderFoodFragment extends Fragment {
                         }
                     });
 
-                    }
+                }
 
 
             });
 
         }
-            return binding.getRoot();
-        }
+        return binding.getRoot();
     }
+}

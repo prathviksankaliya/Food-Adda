@@ -16,12 +16,15 @@ import retrofit2.http.POST;
 public interface ApiInterface {
 
 
+//    Get The Category From Db
     @POST("read_category.php")
     Call<List<PopularItems>> getPopularCat();
 
+    //    Get The Menus Item From Db
     @POST("read_menuitem.php")
     Call<List<AllMenuItems>> getPopularMenuItems();
 
+    //    Send The Confirm Order From Db
     @FormUrlEncoded
     @POST("add_cart.php")
     Call<Responce> ConfirmOrder(
@@ -29,6 +32,8 @@ public interface ApiInterface {
             @Field("quantity") int quantity, @Field("total_price") String total_price,
             @Field("food_name") String food_name, @Field("food_img") String food_img
     );
+
+    //    Send The User Details From Db
     @FormUrlEncoded
     @POST("create_user.php")
     Call<Responce> UserDetails(
@@ -37,6 +42,7 @@ public interface ApiInterface {
             @Field("status") int status
     );
 
+    //    Get The User Details From Db
     @FormUrlEncoded
     @POST("read_user.php")
     Call<UserDetails> ReadUser(
@@ -44,24 +50,28 @@ public interface ApiInterface {
             @Field("phone") String phone
     );
 
+    //    Get The Cart Orders From Db
     @FormUrlEncoded
     @POST("read_cart.php")
     Call<List<AddToCart>> getCartOrders(
             @Field("user_id") int userid
     );
 
+    //    Delete Carts Order From Db
     @FormUrlEncoded
     @POST("delete_cart.php")
     Call<Responce> DeleteCartOrders(
             @Field("id") int id
     );
 
+    //    Delete Cart Order By User id From Db
     @FormUrlEncoded
     @POST("delete_cartbyid.php")
     Call<Responce> DeleteCartOrdersbyId(
             @Field("user_id") int user_id
     );
 
+    //    Search Item Name From Db
     @FormUrlEncoded
     @POST("search_item.php")
     Call<List<AllMenuItems>> SearchByName(
@@ -69,6 +79,7 @@ public interface ApiInterface {
     );
 
 
+    //   Update Order From Db
     @FormUrlEncoded
     @POST("update_cart.php")
     Call<Responce> UpdateOrder(

@@ -2,9 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-
-    >
+    android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -28,9 +26,10 @@
                 android:layout_width="65dp"
                 android:layout_height="65dp"
                 android:layout_margin="6dp"
+                android:background="@drawable/search_bg"
+                android:contentDescription="@string/app_name"
                 android:padding="4dp"
                 android:src="@drawable/pasta64"
-                android:background="@drawable/search_bg"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -41,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:fontFamily="@font/open_sans_bold"
-                android:text="American Pasta"
+                android:text="@string/american_pasta"
                 app:layout_constraintStart_toEndOf="@+id/igAddCartImage"
                 app:layout_constraintTop_toTopOf="@+id/igAddCartImage" />
 
@@ -51,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:fontFamily="@font/open_sans_semibold"
-                android:text="Special"
+                android:text="@string/special"
                 app:layout_constraintStart_toStartOf="@+id/txAddCartFoodName"
                 app:layout_constraintTop_toBottomOf="@+id/txAddCartFoodName" />
 
@@ -60,6 +59,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:contentDescription="@string/american_pasta"
                 android:src="@drawable/star"
                 app:layout_constraintStart_toStartOf="@+id/txallitemspecialsample"
                 app:layout_constraintTop_toBottomOf="@+id/txallitemspecialsample" />
@@ -71,7 +71,7 @@
                 android:layout_marginStart="4dp"
                 android:layout_marginBottom="6dp"
                 android:fontFamily="@font/open_sans_bold"
-                android:text="4.3"
+                android:text="@string/_4_3"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView5"
@@ -82,7 +82,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/open_sans_semibold"
-                android:text="Paid Delivery"
+                android:text="@string/paid_delivery"
                 android:textColor="@color/orange"
                 app:layout_constraintBottom_toBottomOf="@+id/txallitemratingsample"
                 app:layout_constraintEnd_toStartOf="@+id/btnCartPrice"
@@ -95,7 +95,7 @@
                 android:layout_height="0dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="6dp"
-                android:text="₹ 250"
+                android:text="@string/_250"
                 app:layout_constraintBottom_toBottomOf="@+id/txallitemratingsample"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/txAddCartFoodName" />

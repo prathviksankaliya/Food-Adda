@@ -46,26 +46,23 @@ public class DashboardFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentDashboardBinding.inflate(getLayoutInflater());
-
+        // Search The MenuItem By Name
         binding.edSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!binding.edSearch.getText().toString().isEmpty())
-                {
+                if (!binding.edSearch.getText().toString().isEmpty()) {
                     searchtext = binding.edSearch.getText().toString();
-                    searchtext = "+91"+searchtext;
+                    searchtext = "+91" + searchtext;
                     SearchData(searchtext);
-                }
-                else {
+                } else {
                     LoadData();
                 }
 
             }
         });
 
+        // Load The Data
         LoadData();
-
-
 
         binding.igCartHome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,8 +75,8 @@ public class DashboardFragment extends Fragment {
         return binding.getRoot();
     }
 
-    private void SearchData(String searchtext)
-    {
+    // Search The MenuItem By Name
+    private void SearchData(String searchtext) {
         ApiUtilities.apiInterface().SearchByName(searchtext).enqueue(new Callback<List<AllMenuItems>>() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
@@ -98,11 +95,12 @@ public class DashboardFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<AllMenuItems>> call, Throwable t) {
-                Toast.makeText(requireContext(), ""+t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), "" + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-//
     }
+
+    // Load The Categories
     private void LoadData() {
         ApiUtilities.apiInterface().getPopularCat().enqueue(new Callback<List<PopularItems>>() {
             @Override
@@ -122,6 +120,7 @@ public class DashboardFragment extends Fragment {
             }
         });
 
+        // Load The Menu Items
         ApiUtilities.apiInterface().getPopularMenuItems().enqueue(new Callback<List<AllMenuItems>>() {
             @Override
             public void onResponse(Call<List<AllMenuItems>> call, Response<List<AllMenuItems>> response) {

@@ -30,17 +30,15 @@ import retrofit2.Response;
 
 public class AddCartFragment extends Fragment {
 
-    AddToCart addToCart;
-    List<AddToCart> addToCarts;
-    int TotalBillPayment = 0;
+    private List<AddToCart> addToCarts;
+    private int TotalBillPayment = 0;
     private SharedPreferences spf;
     private int UserId;
+    private FragmentAddCartBinding binding;
 
     public AddCartFragment() {
         // Required empty public constructor
     }
-
-    FragmentAddCartBinding binding;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,7 +46,10 @@ public class AddCartFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentAddCartBinding.inflate(getLayoutInflater());
 
+        // Load The Data
         LoadData();
+
+        // Back Button
         binding.igBackAddCartToDashboard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,18 +62,18 @@ public class AddCartFragment extends Fragment {
         return binding.getRoot();
     }
 
-    private void LoadData()
-    {
+    // Load The Data
+    private void LoadData() {
         spf = requireContext().getSharedPreferences("UserProfile", Context.MODE_PRIVATE);
-       UserId =  spf.getInt("UserId",0);
+        UserId = spf.getInt("UserId", 0);
 
+        // Get Cart Orders By UserId
         ApiUtilities.apiInterface().getCartOrders(UserId).enqueue(new Callback<List<AddToCart>>() {
             @Override
             public void onResponse(Call<List<AddToCart>> call, Response<List<AddToCart>> response) {
                 addToCarts = new ArrayList<>();
                 addToCarts = response.body();
-                if(addToCarts.get(0).getMessage() == null)
-                {
+                if (addToCarts.get(0).getMessage() == null) {
                     AddToCartAdapter adapter = new AddToCartAdapter(getContext(), addToCarts);
                     binding.rvAddCart.setAdapter(adapter);
                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
@@ -90,17 +91,17 @@ public class AddCartFragment extends Fragment {
 
                             } else {
                                 Toast.makeText(getContext(), "₹ " + TotalBillPayment + " Payment SuccessFully \n Thank You !!!!", Toast.LENGTH_SHORT).show();
-                                SharedPreferences preferences = requireContext().getSharedPreferences("Data",Context.MODE_PRIVATE);
+                                SharedPreferences preferences = requireContext().getSharedPreferences("Data", Context.MODE_PRIVATE);
                                 SharedPreferences.Editor editor = preferences.edit();
-                                editor.putInt("UserId",UserId);
+                                editor.putInt("UserId", UserId);
                                 editor.apply();
                                 FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
-                                fragmentTransaction.replace(R.id.frMainContainer,new animationFragment());
+                                fragmentTransaction.replace(R.id.frMainContainer, new animationFragment());
                                 fragmentTransaction.addToBackStack(null).commit();
                             }
                         }
                     });
-                }else {
+                } else {
                     Toast.makeText(requireContext(), "Please Order Items", Toast.LENGTH_SHORT).show();
                     binding.txTotalItemPrice.setText("0");
                     binding.btnCartBillPayment.setOnClickListener(new View.OnClickListener() {
@@ -115,7 +116,7 @@ public class AddCartFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<AddToCart>> call, Throwable t) {
-                Toast.makeText(requireContext(), "Something went wrong!!"+t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), "Something went wrong!!" + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

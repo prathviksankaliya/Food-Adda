@@ -32,6 +32,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.viewHolder> {
+
     Context context;
     List<AddToCart> addToCarts;
 
@@ -51,25 +52,25 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.view
     @Override
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
         AddToCart model = addToCarts.get(position);
+        //Set Data using Model
         String Price = "₹ " + model.getTotal_price();
-
         holder.id.setText(String.valueOf(model.getId()));
-        Glide.with(context).load(ApiUtilities.MenuItemImageUrl+model.getFood_img()).into(holder.image);
+        Glide.with(context).load(ApiUtilities.MenuItemImageUrl + model.getFood_img()).into(holder.image);
         holder.name.setText(model.getFood_name());
         holder.price.setText(Price);
         holder.quantity.setText(String.valueOf(model.getQuantity()));
-
+        // Click -> Item Detail Screen
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SpfUserData spfUserData = new SpfUserData(context);
-                spfUserData.setSpfData(model.getFood_img(), model.getFood_name(), null,null,String.valueOf(model.getTotal_price()),null,0,model.getQuantity(),model.getId(),2);
+                spfUserData.setSpfData(model.getFood_img(), model.getFood_name(), null, null, String.valueOf(model.getTotal_price()), null, 0, model.getQuantity(), model.getId(), 2);
 
                 AppCompatActivity activity = (AppCompatActivity) v.getContext();
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.frMainContainer, new OrderFoodFragment()).commit();
             }
         });
-
+        // Long Press To Delete Cart Item
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -80,28 +81,28 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.view
                         .setPositiveButton("YES", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                    ApiUtilities.apiInterface().DeleteCartOrders(model.getId()).enqueue(new Callback<Responce>() {
-                                        @Override
-                                        public void onResponse(Call<Responce> call, Response<Responce> response) {
-                                            Responce model = response.body();
-                                            if (model != null) {
-                                                if (model.getMessage().equals("fail")) {
-                                                    Toast.makeText(context, "Something Went Wrong!!", Toast.LENGTH_SHORT).show();
-                                                } else {
-                                                    Toast.makeText(context, "" + model.getMessage(), Toast.LENGTH_SHORT).show();
-                                                    ((FragmentActivity) context).getSupportFragmentManager().beginTransaction()
-                                                            .replace(R.id.frMainContainer , new AddCartFragment())
-                                                            .addToBackStack(null)
-                                                            .commit();
-                                                }
+                                ApiUtilities.apiInterface().DeleteCartOrders(model.getId()).enqueue(new Callback<Responce>() {
+                                    @Override
+                                    public void onResponse(Call<Responce> call, Response<Responce> response) {
+                                        Responce model = response.body();
+                                        if (model != null) {
+                                            if (model.getMessage().equals("fail")) {
+                                                Toast.makeText(context, "Something Went Wrong!!", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                Toast.makeText(context, "" + model.getMessage(), Toast.LENGTH_SHORT).show();
+                                                ((FragmentActivity) context).getSupportFragmentManager().beginTransaction()
+                                                        .replace(R.id.frMainContainer, new AddCartFragment())
+                                                        .addToBackStack(null)
+                                                        .commit();
                                             }
                                         }
+                                    }
 
-                                        @Override
-                                        public void onFailure(Call<Responce> call, Throwable t) {
-                                            Toast.makeText(context, "" + t.getMessage(), Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
+                                    @Override
+                                    public void onFailure(Call<Responce> call, Throwable t) {
+                                        Toast.makeText(context, "" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
                             }
                         })
                         .setNegativeButton("NO", new DialogInterface.OnClickListener() {

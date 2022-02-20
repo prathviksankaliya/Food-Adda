@@ -48,7 +48,7 @@
             android:layout_marginEnd="10dp"
             android:fontFamily="@font/open_sans_bold"
             android:gravity="center"
-            android:text="₹ 250"
+            android:text="@string/_250"
             android:textColor="@color/orange"
             android:textSize="26sp"
             android:textStyle="bold" />
@@ -60,7 +60,7 @@
             android:layout_marginStart="20dp"
             android:background="@drawable/itemimage_bg"
             android:padding="15dp"
-            android:text="Total Bill Payment" />
+            android:text="@string/total_bill_payment" />
     </LinearLayout>
 
 

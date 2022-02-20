@@ -63,6 +63,8 @@ public class AllMenuItemsAdapter extends RecyclerView.Adapter<AllMenuItemsAdapte
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.frMainContainer, new OrderFoodFragment()).commit();
             }
         });
+
+        // Click -> Item Detail Screen
         holder.binding.btnCartPrice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

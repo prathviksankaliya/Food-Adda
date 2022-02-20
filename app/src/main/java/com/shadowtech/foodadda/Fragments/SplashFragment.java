@@ -21,7 +21,7 @@ public class SplashFragment extends Fragment {
         // Required empty public constructor
     }
 
-    FragmentSplashBinding binding;
+    private FragmentSplashBinding binding;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

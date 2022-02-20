@@ -13,7 +13,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/open_sans_bold"
-        android:text="Food Adda"
+        android:text="@string/food_adda"
         android:textColor="@color/light_black"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,6 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:src="@drawable/bag"
+        android:contentDescription="@string/american_pasta"
         app:layout_constraintBottom_toBottomOf="@+id/textView3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView3" />
@@ -34,7 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/open_sans_bold"
-        android:text="1"
+        android:text="@string/_1"
         android:textColor="@color/orange"
         android:textSize="12sp"
         android:textStyle="bold"
@@ -53,7 +54,7 @@
         android:drawableStart="@drawable/ic_baseline_search_24"
         android:drawablePadding="16dp"
         android:fontFamily="serif"
-        android:hint="Search Food"
+        android:hint="@string/search_food"
         android:inputType="text"
         android:padding="16dp"
         app:layout_constraintEnd_toEndOf="@+id/igCartHome"
@@ -68,7 +69,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/open_sans_bold"
-        android:text="Popular This Week"
+        android:text="@string/popular_this_week"
         android:textColor="@color/light_black"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -92,7 +93,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/open_sans_bold"
-        android:text="All Menu Items"
+        android:text="@string/all_menu_items"
         android:textColor="@color/light_black"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/textView4"
@@ -109,28 +110,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
-
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <!-- <TextView
-                    android:id="@+id/textView5"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/open_sans_bold"
-                    android:text="Recommened for You"
-                    android:textColor="@color/light_black"
-                    android:textSize="16sp"
-                    app:layout_constraintStart_toStartOf="@+id/textView4"
-                    app:layout_constraintTop_toBottomOf="@+id/rvpopularItems" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvrecommenedItems"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView5" />
-    -->

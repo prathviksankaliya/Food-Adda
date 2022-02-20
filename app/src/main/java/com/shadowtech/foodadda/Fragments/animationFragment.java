@@ -40,12 +40,12 @@ public class animationFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentAnimationBinding.inflate(getLayoutInflater());
 
-
+        // Load Animation
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 SharedPreferences preferences = requireContext().getSharedPreferences("Data", Context.MODE_PRIVATE);
-                Id = preferences.getInt("UserId",0);
+                Id = preferences.getInt("UserId", 0);
                 ApiUtilities.apiInterface().DeleteCartOrdersbyId(Id).enqueue(new Callback<Responce>() {
                     @Override
                     public void onResponse(Call<Responce> call, Response<Responce> response) {
@@ -56,12 +56,12 @@ public class animationFragment extends Fragment {
 
                     @Override
                     public void onFailure(Call<Responce> call, Throwable t) {
-                        Toast.makeText(requireContext(), ""+t.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(requireContext(), "" + t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
             }
-        },SPLASH_SCREEN);
-
+        }, SPLASH_SCREEN);
+        // Back Button
         binding.igBackAddCartToDashboard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
