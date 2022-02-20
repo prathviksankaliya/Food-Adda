@@ -11,18 +11,21 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.shadowtech.foodadda.Api.ApiUtilities;
 import com.shadowtech.foodadda.Model.PopularItems;
 import com.shadowtech.foodadda.R;
 import com.shadowtech.foodadda.databinding.FragmentSplashBinding;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PopularItemsRecyclerAdapter extends RecyclerView.Adapter<PopularItemsRecyclerAdapter.viewHolder> {
 
     Context context;
-    ArrayList<PopularItems> popularItems;
+    List<PopularItems> popularItems;
 
-    public PopularItemsRecyclerAdapter(Context context, ArrayList<PopularItems> popularItems) {
+    public PopularItemsRecyclerAdapter(Context context, List<PopularItems> popularItems) {
         this.context = context;
         this.popularItems = popularItems;
     }
@@ -38,7 +41,7 @@ public class PopularItemsRecyclerAdapter extends RecyclerView.Adapter<PopularIte
     @Override
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
         PopularItems model = popularItems.get(position);
-        holder.sampleimg.setImageResource(model.getImage());
+        Glide.with(context).load(ApiUtilities.CatImageUrl+model.getImg()).into(holder.sampleimg);
         holder.sampletext.setText(model.getName());
 
     }

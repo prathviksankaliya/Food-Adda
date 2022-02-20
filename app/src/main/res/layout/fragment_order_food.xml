@@ -128,10 +128,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
         app:layout_constraintEnd_toEndOf="@+id/textView11"
         app:layout_constraintStart_toStartOf="@+id/textView11"
         app:layout_constraintTop_toBottomOf="@+id/textView11">
-
 
         <Button
             android:id="@+id/btnMinus"
@@ -164,38 +164,9 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-    <EditText
-        android:id="@+id/edOrderFullName"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="10dp"
-        android:autofillHints="true"
-        android:background="@drawable/search_bg"
-        android:fontFamily="serif"
-        android:hint="Full Name"
-        android:inputType="text"
-        android:padding="15dp"
-        app:layout_constraintEnd_toEndOf="@+id/textView11"
-        app:layout_constraintStart_toStartOf="@+id/textView11"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
-
-    <EditText
-        android:id="@+id/edOrderPhone"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:autofillHints="true"
-        android:background="@drawable/search_bg"
-        android:fontFamily="serif"
-        android:hint="Phone"
-        android:inputType="phone"
-        android:padding="15dp"
-        app:layout_constraintEnd_toEndOf="@+id/edOrderFullName"
-        app:layout_constraintStart_toStartOf="@+id/edOrderFullName"
-        app:layout_constraintTop_toBottomOf="@+id/edOrderFullName" />
 
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"

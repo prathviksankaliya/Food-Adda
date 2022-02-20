@@ -44,7 +44,7 @@
 
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/edSearch"
         android:layout_width="0dp"
         android:layout_height="52dp"
         android:layout_marginTop="8dp"
@@ -72,7 +72,7 @@
         android:textColor="@color/light_black"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/edSearch" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvpopularItems"

@@ -2,7 +2,6 @@ package com.shadowtech.foodadda.Fragments;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,13 +12,17 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.shadowtech.foodadda.Db.DbHelper;
-import com.shadowtech.foodadda.Model.AddToCart;
-import com.shadowtech.foodadda.Model.ConfirmOrder;
+import com.bumptech.glide.Glide;
+import com.shadowtech.foodadda.Api.ApiUtilities;
+import com.shadowtech.foodadda.Model.Responce;
+import com.shadowtech.foodadda.Model.UserDetails;
 import com.shadowtech.foodadda.R;
 import com.shadowtech.foodadda.databinding.FragmentOrderFoodBinding;
+import com.shadowtech.foodadda.spf.SpfUserData;
 
-import java.util.ArrayList;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class OrderFoodFragment extends Fragment {
 
@@ -29,8 +32,11 @@ public class OrderFoodFragment extends Fragment {
 
     FragmentOrderFoodBinding binding;
     int Count = 1;
-    int TotlePrice, FoodPrice, Quantity, UpdateTotalPrice;
-    DbHelper dbHelper;
+    int TotlePrice, FoodPrice, Quantity, UpdateTotalPrice, UserID;
+
+    private String UserEmail, UserPhone;
+    private SpfUserData spf;
+    private SharedPreferences sharedPreferences;
 
 
     @Override
@@ -38,13 +44,7 @@ public class OrderFoodFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentOrderFoodBinding.inflate(getLayoutInflater());
-        dbHelper = new DbHelper(getContext());
-        ArrayList<AddToCart> addToCarts = dbHelper.AddToCartShowOrders();
-        if (addToCarts.isEmpty()) {
-            binding.igAddCartOrder.setImageResource(R.drawable.bag);
-        } else {
-            binding.igAddCartOrder.setImageResource(R.drawable.fillbag);
-        }
+
         binding.igBackDashboard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,21 +53,21 @@ public class OrderFoodFragment extends Fragment {
                 fragmentTransaction.commit();
             }
         });
-        SharedPreferences spf = requireContext().getSharedPreferences("AllMenuItemsDetail", Context.MODE_PRIVATE);
-        int Image = spf.getInt("Image", 0);
-        String Name = spf.getString("Name", null);
-        String Special = spf.getString("Special", null);
-        String Rating = spf.getString("Rating", null);
-        String Price = spf.getString("Price", null);
-        String Delivery = spf.getString("Delivery", null);
-        int InsertType = spf.getInt("Insert", 0);
-        int UpdateType = spf.getInt("Update", 0);
+
+        spf = new SpfUserData(requireContext());
+        String Image = spf.getSpfData().getString("Image", null);
+        String Name = spf.getSpfData().getString("Name", null);
+        String Special = spf.getSpfData().getString("Special", null);
+        String Rating = spf.getSpfData().getString("Rating", null);
+        String Price = spf.getSpfData().getString("Price", null);
+         Quantity = spf.getSpfData().getInt("Quntity", 0);
+
+        String Delivery = spf.getSpfData().getString("Delivery", null);
+        int InsertType = spf.getSpfData().getInt("Insert", 0);
+        int UpdateType = spf.getSpfData().getInt("Update", 0);
 
         if (InsertType == 1) {
-            SharedPreferences.Editor editor = spf.edit();
-            editor.remove("Insert");
-            editor.apply();
-            binding.igOrderFood.setImageResource(Image);
+            Glide.with(requireContext()).load(ApiUtilities.MenuItemImageUrl + Image).into(binding.igOrderFood);
             binding.txOrderFoodName.setText(Name);
             binding.txOrderFoodRating.setText(Rating);
             binding.txOrderFoodPrice.setText("₹ " + Price);
@@ -114,45 +114,83 @@ public class OrderFoodFragment extends Fragment {
                     if (TotlePrice == 0) {
                         TotlePrice = FoodPrice;
                     }
-                    if (binding.edOrderFullName.getText().toString().isEmpty()) {
-                        binding.edOrderFullName.setError("Please Enter Name");
-                        binding.edOrderFullName.requestFocus();
-                    } else if (binding.edOrderPhone.getText().length() != 10) {
-                        binding.edOrderPhone.setError("Enter Valid Phone Number");
-                        binding.edOrderPhone.requestFocus();
+
+                    sharedPreferences = requireContext().getSharedPreferences("UserProfile", Context.MODE_PRIVATE);
+                    UserEmail = sharedPreferences.getString("UserEmail", null);
+                    UserPhone = sharedPreferences.getString("UserPhone", null);
+                    if (UserEmail == null && UserPhone == null) {
+                        FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+                        fragmentTransaction.replace(R.id.frMainContainer, new UserDetailsFragment());
+                        fragmentTransaction.commit();
                     } else {
-                        ConfirmOrder confirmOrder = new ConfirmOrder(Image, TotlePrice, Count, binding.edOrderFullName.getText().toString(),
-                                binding.edOrderPhone.getText().toString(), Name);
-                        boolean isInsert = dbHelper.ConfirmOrderInsert(confirmOrder);
-                        if (isInsert) {
-                            Toast.makeText(getContext(), "Order Add To Cart", Toast.LENGTH_SHORT).show();
-                            FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
-                            fragmentTransaction.replace(R.id.frMainContainer, new AddCartFragment());
-                            fragmentTransaction.commit();
-                        } else {
-                            Toast.makeText(getContext(), "failed To Cart", Toast.LENGTH_SHORT).show();
-                        }
+                        ApiUtilities.apiInterface().ReadUser(UserEmail, UserPhone).enqueue(new Callback<UserDetails>() {
+                            @Override
+                            public void onResponse(Call<UserDetails> call, Response<UserDetails> response) {
+                                UserDetails model = response.body();
+                                if (model != null) {
+                                    if (model.getMessage() == null) {
+                                        UserID = model.getId();
+                                        sharedPreferences = requireContext().getSharedPreferences("UserProfile", Context.MODE_PRIVATE);
+                                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                                        editor.putInt("UserId", UserID);
+                                        editor.apply();
+                                        ApiUtilities.apiInterface().ConfirmOrder(UserID, Count, String.valueOf(TotlePrice), Name, Image).enqueue(new Callback<Responce>() {
+                                            @Override
+                                            public void onResponse(Call<Responce> call, Response<Responce> response) {
+                                                Responce model = response.body();
+                                                if (model != null) {
+                                                    if (model.getMessage().equals("fail")) {
+                                                        Toast.makeText(getContext(), "Something Went Wrong!!", Toast.LENGTH_SHORT).show();
+                                                    } else {
+                                                        Toast.makeText(getContext(), "" + model.getMessage(), Toast.LENGTH_SHORT).show();
+                                                        spf.setSpfData(Image, Name, Special, Rating, String.valueOf(TotlePrice), Delivery, 0,Count,0,0);
+                                                        FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+                                                        fragmentTransaction.replace(R.id.frMainContainer, new DashboardFragment());
+                                                        fragmentTransaction.commit();
+                                                    }
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onFailure(Call<Responce> call, Throwable t) {
+                                                Toast.makeText(getContext(), "Something Went Wrong order"+t.getMessage(), Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+
+                                    } else {
+                                        Toast.makeText(requireContext(), "Something went Wrong!!", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<UserDetails> call, Throwable t) {
+                                Toast.makeText(getContext(), "Something Went Wrong"+t.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
                 }
+
             });
         } else if (UpdateType == 2) {
-            int id = spf.getInt("id", 0);
-            Cursor cursor = dbHelper.getOrderById(id);
-            SharedPreferences.Editor editor = spf.edit();
+            SharedPreferences pref = requireContext().getSharedPreferences("AllMenuItemsDetail", Context.MODE_PRIVATE);
+            int id = pref.getInt("id", 0);
+
+            SharedPreferences.Editor editor = pref.edit();
             editor.remove("Update");
             editor.apply();
 
-            binding.igOrderFood.setImageResource(cursor.getInt(4));
-            binding.txOrderFoodName.setText(cursor.getString(3));
+
+            Glide.with(requireContext()).load(ApiUtilities.MenuItemImageUrl + Image).into(binding.igOrderFood);
+            binding.txOrderFoodName.setText(Name);
+            binding.txOrderFoodRating.setText(Rating);
+
             binding.txOrderFoodRating.setVisibility(View.GONE);
-            int TotalPrice = cursor.getInt(6);
-            Quantity = cursor.getInt(5);
+            int TotalPrice = Integer.parseInt(Price);
             int SingleFoodPrice = TotalPrice / Quantity;
             binding.txCount.setText("" + Quantity);
             binding.txOrderFoodPrice.setText("₹ " + SingleFoodPrice);
             binding.txTotalFoodPrice.setText("₹ " + TotalPrice);
-            binding.edOrderFullName.setText(cursor.getString(1));
-            binding.edOrderPhone.setText(cursor.getString(2));
             binding.btnOrderAddToCart.setText("Update Order");
 
             binding.btnPlus.setOnClickListener(new View.OnClickListener() {
@@ -194,27 +232,34 @@ public class OrderFoodFragment extends Fragment {
                     if (UpdateTotalPrice == 0) {
                         UpdateTotalPrice = SingleFoodPrice;
                     }
-                    if (binding.edOrderFullName.getText().toString().isEmpty()) {
-                        binding.edOrderFullName.setError("Please Enter Name");
-                        binding.edOrderFullName.requestFocus();
-                    } else if (binding.edOrderPhone.getText().length() != 10) {
-                        binding.edOrderPhone.setError("Enter Valid Phone Number");
-                        binding.edOrderPhone.requestFocus();
-                    } else {
-                        ConfirmOrder confirmOrder = new ConfirmOrder(id, cursor.getInt(4), UpdateTotalPrice, Quantity,
-                                binding.edOrderFullName.getText().toString(), binding.edOrderPhone.getText().toString(),
-                                cursor.getString(3));
-                        boolean isUpdate = dbHelper.UpdateConfirmOrder(confirmOrder);
-                        if (isUpdate) {
-                            Toast.makeText(getContext(), "Update Order", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(getContext(), "Failed Order", Toast.LENGTH_SHORT).show();
+                    ApiUtilities.apiInterface().UpdateOrder(id,Quantity,String.valueOf(UpdateTotalPrice),Name,Image).enqueue(new Callback<Responce>() {
+                        @Override
+                        public void onResponse(Call<Responce> call, Response<Responce> response) {
+                            Responce model = response.body();
+                            if (model != null) {
+                                if (model.getMessage().equals("fail")) {
+                                    Toast.makeText(getContext(), "Something Went Wrong!!", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(getContext(), "" + model.getMessage(), Toast.LENGTH_SHORT).show();
+                                    FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+                                    fragmentTransaction.replace(R.id.frMainContainer, new AddCartFragment());
+                                    fragmentTransaction.commit();
+                                }
+                            }
                         }
-                    }
-                }
-            });
-        }
 
-        return binding.getRoot();
+                        @Override
+                        public void onFailure(Call<Responce> call, Throwable t) {
+                            Toast.makeText(getContext(), "" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                    }
+
+
+            });
+
+        }
+            return binding.getRoot();
+        }
     }
-}

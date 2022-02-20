@@ -1,15 +1,31 @@
 package com.shadowtech.foodadda.Model;
 
 public class PopularItems {
-    private String name;
-    private int image;
+    private int id,status;
+    private String name,img,date;
 
-    public PopularItems(String name, int image) {
+    public PopularItems(int id, int status, String name, String img, String date) {
+        this.id = id;
+        this.status = status;
         this.name = name;
-        this.image = image;
+        this.img = img;
+        this.date = date;
     }
 
-    public PopularItems() {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public String getName() {
@@ -20,11 +36,19 @@ public class PopularItems {
         this.name = name;
     }
 
-    public int getImage() {
-        return image;
+    public String getImg() {
+        return img;
     }
 
-    public void setImage(int image) {
-        this.image = image;
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }

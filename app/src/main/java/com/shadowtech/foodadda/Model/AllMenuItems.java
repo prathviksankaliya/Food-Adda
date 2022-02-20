@@ -2,20 +2,86 @@ package com.shadowtech.foodadda.Model;
 
 public class AllMenuItems {
 
-   private int allitemimage;
-   private String allitemname , allitemspecial , allitemrating ,allitemprice , delivery;
+    private int id,status;
+    private double rating;
+    private String name, img,description,price,delivery,type,date,message;
 
-
-    public AllMenuItems(int allitemimage, String allitemname, String allitemspecial, String allitemrating, String allitemprice, String delivery) {
-        this.allitemimage = allitemimage;
-        this.allitemname = allitemname;
-        this.allitemspecial = allitemspecial;
-        this.allitemrating = allitemrating;
-        this.allitemprice = allitemprice;
+    public AllMenuItems(int id, int status, double rating, String name, String img, String description, String price, String delivery, String type, String date, String message) {
+        this.id = id;
+        this.status = status;
+        this.rating = rating;
+        this.name = name;
+        this.img = img;
+        this.description = description;
+        this.price = price;
         this.delivery = delivery;
+        this.message = message;
+        this.type = type;
+        this.date = date;
     }
 
-    public AllMenuItems() {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
     }
 
     public String getDelivery() {
@@ -26,43 +92,19 @@ public class AllMenuItems {
         this.delivery = delivery;
     }
 
-    public int getAllitemimage() {
-        return allitemimage;
+    public String getType() {
+        return type;
     }
 
-    public void setAllitemimage(int allitemimage) {
-        this.allitemimage = allitemimage;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public String getAllitemname() {
-        return allitemname;
+    public String getDate() {
+        return date;
     }
 
-    public void setAllitemname(String allitemname) {
-        this.allitemname = allitemname;
-    }
-
-    public String getAllitemspecial() {
-        return allitemspecial;
-    }
-
-    public void setAllitemspecial(String allitemspecial) {
-        this.allitemspecial = allitemspecial;
-    }
-
-    public String getAllitemrating() {
-        return allitemrating;
-    }
-
-    public void setAllitemrating(String allitemrating) {
-        this.allitemrating = allitemrating;
-    }
-
-    public String getAllitemprice() {
-        return allitemprice;
-    }
-
-    public void setAllitemprice(String allitemprice) {
-        this.allitemprice = allitemprice;
+    public void setDate(String date) {
+        this.date = date;
     }
 }

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.UserDetailsFragment">
+
+    <ImageView
+        android:id="@+id/igBackDashboard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:contentDescription="@string/topline"
+        android:padding="5dp"
+        android:src="@drawable/ic_baseline_keyboard_backspace_24"
+        app:layout_constraintBottom_toTopOf="@+id/imageView2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/logobg"
+        app:layout_constraintBottom_toTopOf="@+id/edOrderFullName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/igBackDashboard" />
+
+
+    <EditText
+        android:id="@+id/edOrderFullName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:autofillHints="true"
+        android:background="@drawable/search_bg"
+        android:fontFamily="serif"
+        android:hint="Full Name"
+        android:inputType="text"
+        android:padding="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/edUserEmail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+    <EditText
+
+        android:id="@+id/edUserEmail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:autofillHints="true"
+        android:background="@drawable/search_bg"
+        android:fontFamily="serif"
+        android:hint="Email Address"
+        android:inputType="textEmailAddress"
+        android:padding="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/edUserPhone"
+        app:layout_constraintEnd_toEndOf="@+id/edOrderFullName"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/edOrderFullName"
+        app:layout_constraintTop_toBottomOf="@+id/edOrderFullName" />
+
+    <EditText
+
+        android:id="@+id/edUserAddress"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:autofillHints="true"
+        android:background="@drawable/search_bg"
+        android:fontFamily="serif"
+        android:hint="Address"
+        android:inputType="text"
+        android:padding="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnSaveProfile"
+        app:layout_constraintEnd_toEndOf="@+id/edUserPhone"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/edUserPhone"
+        app:layout_constraintTop_toBottomOf="@+id/edUserPhone" />
+
+    <EditText
+
+        android:id="@+id/edUserPhone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:autofillHints="true"
+        android:background="@drawable/search_bg"
+        android:fontFamily="serif"
+        android:hint="Phone Number"
+        android:inputType="phone"
+
+        android:padding="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/edUserAddress"
+        app:layout_constraintEnd_toEndOf="@+id/edUserEmail"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/edUserEmail"
+        app:layout_constraintTop_toBottomOf="@+id/edUserEmail" />
+
+    <TextView
+        android:id="@+id/btnSaveProfile"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/splashbtn_bg"
+        android:fontFamily="@font/baloo"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="Save Profile"
+        android:textColor="@color/white"
+        android:textSize="23sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/edUserAddress"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/edUserAddress"
+        app:layout_constraintTop_toBottomOf="@+id/edUserAddress" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

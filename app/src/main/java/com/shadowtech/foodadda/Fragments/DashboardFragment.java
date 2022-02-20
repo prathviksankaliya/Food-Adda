@@ -1,5 +1,6 @@
 package com.shadowtech.foodadda.Fragments;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,17 +11,22 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.shadowtech.foodadda.Adapter.AllMenuItemsAdapter;
 import com.shadowtech.foodadda.Adapter.PopularItemsRecyclerAdapter;
-import com.shadowtech.foodadda.Db.DbHelper;
-import com.shadowtech.foodadda.Model.AddToCart;
+import com.shadowtech.foodadda.Api.ApiUtilities;
 import com.shadowtech.foodadda.Model.AllMenuItems;
 import com.shadowtech.foodadda.Model.PopularItems;
 import com.shadowtech.foodadda.R;
 import com.shadowtech.foodadda.databinding.FragmentDashboardBinding;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class DashboardFragment extends Fragment {
@@ -29,63 +35,37 @@ public class DashboardFragment extends Fragment {
         // Required empty public constructor
     }
 
-    FragmentDashboardBinding binding;
-    ArrayList<PopularItems> popularItems;
-    ArrayList<AllMenuItems> allMenuItems;
-    DbHelper dbHelper;
+    private FragmentDashboardBinding binding;
+    private List<AllMenuItems> allMenuItems;
+    private List<PopularItems> list;
+    private String searchtext;
+    private AllMenuItemsAdapter allMenuItemsAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentDashboardBinding.inflate(getLayoutInflater());
-        dbHelper = new DbHelper(getContext());
-        ArrayList<AddToCart> addToCarts = dbHelper.AddToCartShowOrders();
 
-        if (addToCarts.isEmpty()) {
-            binding.igCartHome.setImageResource(R.drawable.bag);
-        } else {
-            binding.igCartHome.setImageResource(R.drawable.fillbag);
-        }
-        popularItems = new ArrayList<>();
-        popularItems.add(new PopularItems("Pasta", R.drawable.pasta64));
-        popularItems.add(new PopularItems("Pizza", R.drawable.pizzamenu));
-        popularItems.add(new PopularItems("Samosa", R.drawable.samosa));
-        popularItems.add(new PopularItems("Burger", R.drawable.burger));
-        popularItems.add(new PopularItems("Sandwich", R.drawable.sandwich));
-        popularItems.add(new PopularItems("Kachori", R.drawable.kachori));
-        popularItems.add(new PopularItems("Dosa", R.drawable.dosa));
-        popularItems.add(new PopularItems("Vadapav", R.drawable.vadapav));
-        popularItems.add(new PopularItems("French Fry", R.drawable.ff));
+        binding.edSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!binding.edSearch.getText().toString().isEmpty())
+                {
+                    searchtext = binding.edSearch.getText().toString();
+                    searchtext = "+91"+searchtext;
+                    SearchData(searchtext);
+                }
+                else {
+                    LoadData();
+                }
 
-        PopularItemsRecyclerAdapter adapter = new PopularItemsRecyclerAdapter(getContext(), popularItems);
-        binding.rvpopularItems.setAdapter(adapter);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
-        binding.rvpopularItems.setLayoutManager(linearLayoutManager);
+            }
+        });
 
-        allMenuItems = new ArrayList<>();
-        allMenuItems.add(new AllMenuItems(R.drawable.pasta64, "American Pasta", "Special", "4.8", "120", "Paid Delivery"));
-        allMenuItems.add(new AllMenuItems(R.drawable.pizzamenu, "Margarita Pizza", "Regular", "4.0", "299", "Free Delivery"));
-        allMenuItems.add(new AllMenuItems(R.drawable.samosa, "Maha Samosa", "Special", "3.7", "80", "Paid Delivery"));
-        allMenuItems.add(new AllMenuItems(R.drawable.burger, "Cheese Burger", "Regular", "4.1", "60", "Paid Delivery"));
-        allMenuItems.add(new AllMenuItems(R.drawable.sandwich, "Paneer Sandwich", "Regular", "3.9", "140", "Paid Delivery"));
-        allMenuItems.add(new AllMenuItems(R.drawable.kachori, "Sweet Kachori", "Special", "4.3", "115", "Paid Delivery"));
-        allMenuItems.add(new AllMenuItems(R.drawable.dosa, "Masala Dosa", "Special", "4.8", "199", "Free Delivery"));
-        allMenuItems.add(new AllMenuItems(R.drawable.ff, "French Fry", "Regular", "4.4", "99", "Paid Delivery"));
+        LoadData();
 
-        allMenuItems.add(new AllMenuItems(R.drawable.pasta64, "Cheese Pasta", "Special", "4.8", "260", "Free Delivery"));
-        allMenuItems.add(new AllMenuItems(R.drawable.pizzamenu, "crusts Pizza", "Special", "4.0", "399", "Free Delivery"));
-        allMenuItems.add(new AllMenuItems(R.drawable.samosa, "Spicy Samosa", "Regular", "4.9", "140", "Paid Delivery"));
-        allMenuItems.add(new AllMenuItems(R.drawable.burger, "Maha Burger", "Regular", "4.1", "99", "Paid Delivery"));
-        allMenuItems.add(new AllMenuItems(R.drawable.sandwich, "Masala Sandwich", "Special", "3.0", "170", "Free Delivery"));
-        allMenuItems.add(new AllMenuItems(R.drawable.kachori, "Regular Kachori", "Regular", "4.4", "130", "Paid Delivery"));
-        allMenuItems.add(new AllMenuItems(R.drawable.dosa, "Maisuri Dosa", "Special", "3.5", "199", "Free Delivery"));
-        allMenuItems.add(new AllMenuItems(R.drawable.ff, "Masala Fry", "Special", "4.5", "130", "Home Delivery"));
 
-        AllMenuItemsAdapter allMenuItemsAdapter = new AllMenuItemsAdapter(getContext(), allMenuItems);
-        binding.rvAllMenuItems.setAdapter(allMenuItemsAdapter);
-        LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(getContext());
-        binding.rvAllMenuItems.setLayoutManager(linearLayoutManager2);
 
         binding.igCartHome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,9 +75,71 @@ public class DashboardFragment extends Fragment {
                 fragmentTransaction.commit();
             }
         });
-
-
         return binding.getRoot();
+    }
+
+    private void SearchData(String searchtext)
+    {
+        ApiUtilities.apiInterface().SearchByName(searchtext).enqueue(new Callback<List<AllMenuItems>>() {
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public void onResponse(Call<List<AllMenuItems>> call, Response<List<AllMenuItems>> response) {
+                assert response.body() != null;
+                allMenuItems.clear();
+                allMenuItems.addAll(response.body());
+                if (allMenuItems != null) {
+                    if (allMenuItems.get(0).getMessage() == null) {
+                        allMenuItemsAdapter.notifyDataSetChanged();
+                    } else {
+                        Toast.makeText(requireContext(), "Data Not Found", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<AllMenuItems>> call, Throwable t) {
+                Toast.makeText(requireContext(), ""+t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+//
+    }
+    private void LoadData() {
+        ApiUtilities.apiInterface().getPopularCat().enqueue(new Callback<List<PopularItems>>() {
+            @Override
+            public void onResponse(Call<List<PopularItems>> call, Response<List<PopularItems>> response) {
+                list = new ArrayList<>();
+                list = response.body();
+
+                PopularItemsRecyclerAdapter adapter = new PopularItemsRecyclerAdapter(getContext(), list);
+                binding.rvpopularItems.setAdapter(adapter);
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
+                binding.rvpopularItems.setLayoutManager(linearLayoutManager);
+            }
+
+            @Override
+            public void onFailure(Call<List<PopularItems>> call, Throwable t) {
+                Toast.makeText(requireContext(), "" + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        ApiUtilities.apiInterface().getPopularMenuItems().enqueue(new Callback<List<AllMenuItems>>() {
+            @Override
+            public void onResponse(Call<List<AllMenuItems>> call, Response<List<AllMenuItems>> response) {
+                allMenuItems = new ArrayList<>();
+                allMenuItems = response.body();
+
+                allMenuItemsAdapter = new AllMenuItemsAdapter(getContext(), allMenuItems);
+                binding.rvAllMenuItems.setAdapter(allMenuItemsAdapter);
+                LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(getContext());
+                binding.rvAllMenuItems.setLayoutManager(linearLayoutManager2);
+
+            }
+
+            @Override
+            public void onFailure(Call<List<AllMenuItems>> call, Throwable t) {
+                Toast.makeText(requireContext(), "" + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 }
