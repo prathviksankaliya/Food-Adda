@@ -15,7 +15,6 @@ import retrofit2.http.POST;
 
 public interface ApiInterface {
 
-
 //    Get The Category From Db
     @POST("read_category.php")
     Call<List<PopularItems>> getPopularCat();
