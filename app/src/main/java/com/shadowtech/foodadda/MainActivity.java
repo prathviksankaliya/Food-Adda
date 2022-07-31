@@ -1,14 +1,18 @@
 package com.shadowtech.foodadda;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentContainerView;
-import androidx.fragment.app.FragmentTransaction;
-
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.shadowtech.foodadda.Fragments.SplashFragment;
+import com.shadowtech.foodadda.Utils.NetworkChangeListner;
 
 public class MainActivity extends AppCompatActivity {
+
+    private final NetworkChangeListner networkChangeListner = new NetworkChangeListner();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,5 +31,18 @@ public class MainActivity extends AppCompatActivity {
         } else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    protected void onStart() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeListner, filter);
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(networkChangeListner);
+        super.onStop();
     }
 }

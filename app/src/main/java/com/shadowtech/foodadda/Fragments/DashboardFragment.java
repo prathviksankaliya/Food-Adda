@@ -52,7 +52,6 @@ public class DashboardFragment extends Fragment {
             public void onClick(View v) {
                 if (!binding.edSearch.getText().toString().isEmpty()) {
                     searchtext = binding.edSearch.getText().toString();
-                    searchtext = "+91" + searchtext;
                     SearchData(searchtext);
                 } else {
                     LoadData();
@@ -85,7 +84,8 @@ public class DashboardFragment extends Fragment {
                 allMenuItems.clear();
                 allMenuItems.addAll(response.body());
                 if (allMenuItems != null) {
-                    if (allMenuItems.get(0).getMessage() == null) {
+
+                    if ( allMenuItems.get(0).getStatus() == 1) {
                         allMenuItemsAdapter.notifyDataSetChanged();
                     } else {
                         Toast.makeText(requireContext(), "Data Not Found", Toast.LENGTH_SHORT).show();
