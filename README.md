@@ -46,3 +46,30 @@ Android (Java), Retrofit, Web APIs, PHP, MYSQL(Database).
 
 <img src="https://github.com/prathviksankaliya/Food-Adda/blob/master/Screenshot/1.jpg" height="500px"><img src="https://github.com/prathviksankaliya/Food-Adda/blob/master/Screenshot/2.jpg" height="500px" hspace=24><img src="https://github.com/prathviksankaliya/Food-Adda/blob/master/Screenshot/3.jpg" height="500px"><br/>
 <img src="https://github.com/prathviksankaliya/Food-Adda/blob/master/Screenshot/4.jpg" height="500px"><img src="https://github.com/prathviksankaliya/Food-Adda/blob/master/Screenshot/5.jpg" height="500px" hspace=24><img src="https://github.com/prathviksankaliya/Food-Adda/blob/master/Screenshot/6.jpg" height="500px"><br/><img src="https://github.com/prathviksankaliya/Food-Adda/blob/master/Screenshot/7.jpg" height="500px">
+
+
+# Web Admin Panel ScreenShot
+
+# Login Page
+<img src="https://github.com/akshay0077/FoodAdda-Android-App/blob/Admin-Photos/1-login.png" height=250px >
+<br/>
+
+# Register (New User) Page
+<img src="https://github.com/akshay0077/FoodAdda-Android-App/blob/Admin-Photos/2-register.png" height=250px>
+<br/>
+
+# DashBoard
+<img src="https://github.com/akshay0077/FoodAdda-Android-App/blob/Admin-Photos/3-dashboard.png" height=250px>
+<br/>
+
+# New categoty add here
+<img src="https://github.com/akshay0077/FoodAdda-Android-App/blob/Admin-Photos/4-addcategory.png" height=250px>
+<br/>
+
+# Add menu here
+<img src="https://github.com/akshay0077/FoodAdda-Android-App/blob/Admin-Photos/5-addmenu.png" height=250px>
+<br/>
+
+# All Data show in Table
+<img src="https://github.com/akshay0077/FoodAdda-Android-App/blob/Admin-Photos/6-alltable.png" height=250px>
+<br/>
