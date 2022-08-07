@@ -44,6 +44,5 @@ Android (Java), Retrofit, Web APIs, PHP, MYSQL(Database).
 
 # Application ScreenShot
 
-<img src="https://github.com/prathviksankaliya/PicturePoint/blob/master/Screenshots/screen_1.png" height="500px"><img src="https://github.com/prathviksankaliya/PicturePoint/blob/master/Screenshots/screen_2.png" height="500px" hspace=24><img src="https://github.com/prathviksankaliya/PicturePoint/blob/master/Screenshots/screen_3.png" height="500px"><br/>
-<img src="https://github.com/prathviksankaliya/PicturePoint/blob/master/Screenshots/screen_4.png" height="500px"><img src="https://github.com/prathviksankaliya/PicturePoint/blob/master/Screenshots/screen_5.png" height="500px" hspace=24><img src="https://github.com/prathviksankaliya/PicturePoint/blob/master/Screenshots/screen_6.png" height="500px"><br/>
-<img src="https://github.com/prathviksankaliya/PicturePoint/blob/master/Screenshots/screen_7.png" height="500px">
+<img src="https://github.com/prathviksankaliya/Food-Adda/blob/master/Screenshot/1.jpg" height="500px"><img src="https://github.com/prathviksankaliya/Food-Adda/blob/master/Screenshot/2.jpg" height="500px" hspace=24><img src="https://github.com/prathviksankaliya/Food-Adda/blob/master/Screenshot/3.jpg" height="500px"><br/>
+<img src="https://github.com/prathviksankaliya/Food-Adda/blob/master/Screenshot/4.jpg" height="500px"><img src="https://github.com/prathviksankaliya/Food-Adda/blob/master/Screenshot/5.jpg" height="500px" hspace=24><img src="https://github.com/prathviksankaliya/Food-Adda/blob/master/Screenshot/6.jpg" height="500px"><br/><img src="https://github.com/prathviksankaliya/Food-Adda/blob/master/Screenshot/7.jpg" height="500px">
